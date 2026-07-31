@@ -6,6 +6,8 @@
 [![Status](https://img.shields.io/badge/status-beta-orange.svg)](#project-status)
 [![Code license](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 
+**[Open the live playground](https://sheldon010507-collab.github.io/grounded-layer/)** · **[Browse preview releases](https://github.com/sheldon010507-collab/grounded-layer/releases)**
+
 When an agent is connected to email, orders, bookings, payments, or any other external system, a chat transcript is not enough. The user needs to see the exact action before it runs. The application needs a machine-readable record of what happened afterward.
 
 Grounded Layer defines that boundary.
@@ -49,7 +51,11 @@ If the runtime discovers that a bound fact changed before execution, it can retu
 
 This is especially useful when non-technical users work across different models or agents: the model can change, while the confirmation and receipt contract stays consistent.
 
-## Try the UI locally
+## Try it now
+
+The fastest way to understand Grounded Layer is the [live playground](https://sheldon010507-collab.github.io/grounded-layer/). It is a static, fixture-only demo: no server, MCP connection, credentials, or real tool execution is involved.
+
+To run the same playground locally:
 
 Requirements: Node.js 22.13+ and pnpm 11.5.2.
 
@@ -61,7 +67,7 @@ pnpm build
 pnpm dev:playground
 ```
 
-Open the local URL printed by Vite. The playground uses local fixtures only. Approving, editing, or rejecting a card changes demo state; it does **not** call a real tool, model, or hosted service.
+Open the local URL printed by Vite. Approving, editing, or rejecting a card changes demo state; it does **not** call a real tool, model, or hosted service.
 
 ## React integration
 
@@ -104,9 +110,9 @@ Those concerns must be implemented by a compatible runtime. The private Grounded
 
 ## Project status
 
-Grounded Layer is currently a **beta protocol release**. The protocol package is versioned as `1.0.0-rc.0`. The public source and schemas are available now; the npm packages have not yet been published.
+Grounded Layer is currently a **public beta preview**. The protocol package is versioned as `1.0.0-rc.0`. The public source, schemas, GitHub preview releases, and static playground are the supported distribution surface for this phase.
 
-Tagged releases are prepared to use npm trusted publishing (OIDC), with no npm token stored in GitHub. Package ownership and trusted-publisher setup must be completed before the first public tag.
+The npm distribution is intentionally deferred until there is a concrete need for package-manager installation. For now, contributors and adopters can clone the repository, run the playground, and integrate the public protocol and renderer source into their own runtime.
 
 ## License
 
