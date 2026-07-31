@@ -35,11 +35,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "type",
-                  "param",
-                  "factId"
-                ],
+                "required": ["type", "param", "factId"],
                 "additionalProperties": false
               },
               {
@@ -57,11 +53,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "type",
-                  "param",
-                  "decidedBy"
-                ],
+                "required": ["type", "param", "decidedBy"],
                 "additionalProperties": false
               }
             ]
@@ -72,19 +64,11 @@
         },
         "proposedBy": {
           "type": "string",
-          "enum": [
-            "model",
-            "user",
-            "sop"
-          ]
+          "enum": ["model", "user", "sop"]
         },
         "checkpoint": {
           "type": "string",
-          "enum": [
-            "show",
-            "notify",
-            "confirm"
-          ]
+          "enum": ["show", "notify", "confirm"]
         },
         "status": {
           "type": "string",

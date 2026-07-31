@@ -3,11 +3,7 @@
   "definitions": {
     "EventActor": {
       "type": "string",
-      "enum": [
-        "model",
-        "user",
-        "system"
-      ]
+      "enum": ["model", "user", "system"]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"

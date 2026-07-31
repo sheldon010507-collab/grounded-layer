@@ -29,14 +29,7 @@
           "const": "confirm"
         }
       },
-      "required": [
-        "batchId",
-        "runId",
-        "toolRef",
-        "templateDesc",
-        "itemIntentIds",
-        "checkpoint"
-      ],
+      "required": ["batchId", "runId", "toolRef", "templateDesc", "itemIntentIds", "checkpoint"],
       "additionalProperties": false
     }
   },

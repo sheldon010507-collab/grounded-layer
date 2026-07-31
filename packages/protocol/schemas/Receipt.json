@@ -9,12 +9,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "confirmed",
-            "failed",
-            "unknown",
-            "pending"
-          ]
+          "enum": ["confirmed", "failed", "unknown", "pending"]
         },
         "externalRef": {
           "type": "string"
@@ -33,13 +28,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "intentId",
-        "status",
-        "rawHash",
-        "recordedAt",
-        "signature"
-      ],
+      "required": ["intentId", "status", "rawHash", "recordedAt", "signature"],
       "additionalProperties": false
     }
   },

@@ -9,39 +9,21 @@
         },
         "claimType": {
           "type": "string",
-          "enum": [
-            "number",
-            "currency",
-            "datetime",
-            "entity",
-            "status_assertion"
-          ]
+          "enum": ["number", "currency", "datetime", "entity", "status_assertion"]
         },
         "verdict": {
           "type": "string",
-          "enum": [
-            "matched",
-            "mismatch",
-            "unsupported_inference"
-          ]
+          "enum": ["matched", "mismatch", "unsupported_inference"]
         },
         "factId": {
           "type": "string"
         },
         "channel": {
           "type": "string",
-          "enum": [
-            "chat",
-            "voice"
-          ]
+          "enum": ["chat", "voice"]
         }
       },
-      "required": [
-        "claimText",
-        "claimType",
-        "verdict",
-        "channel"
-      ],
+      "required": ["claimText", "claimType", "verdict", "channel"],
       "additionalProperties": false
     }
   },

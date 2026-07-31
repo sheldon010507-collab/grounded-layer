@@ -17,11 +17,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "type",
-            "param",
-            "factId"
-          ],
+          "required": ["type", "param", "factId"],
           "additionalProperties": false
         },
         {
@@ -39,11 +35,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "type",
-            "param",
-            "decidedBy"
-          ],
+          "required": ["type", "param", "decidedBy"],
           "additionalProperties": false
         }
       ]

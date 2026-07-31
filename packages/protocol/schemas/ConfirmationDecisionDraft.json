@@ -14,10 +14,7 @@
               "const": "approve"
             }
           },
-          "required": [
-            "confirmationToken",
-            "decision"
-          ],
+          "required": ["confirmationToken", "decision"],
           "additionalProperties": false
         },
         {
@@ -39,28 +36,16 @@
                     "type": "string"
                   },
                   "value": {
-                    "type": [
-                      "string",
-                      "number",
-                      "boolean",
-                      "null"
-                    ]
+                    "type": ["string", "number", "boolean", "null"]
                   }
                 },
-                "required": [
-                  "param",
-                  "value"
-                ],
+                "required": ["param", "value"],
                 "additionalProperties": false
               },
               "minItems": 1
             }
           },
-          "required": [
-            "confirmationToken",
-            "decision",
-            "edits"
-          ],
+          "required": ["confirmationToken", "decision", "edits"],
           "additionalProperties": false
         },
         {
@@ -74,10 +59,7 @@
               "const": "reject"
             }
           },
-          "required": [
-            "confirmationToken",
-            "decision"
-          ],
+          "required": ["confirmationToken", "decision"],
           "additionalProperties": false
         }
       ]

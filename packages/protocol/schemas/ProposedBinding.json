@@ -14,10 +14,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "param",
-        "factKey"
-      ],
+      "required": ["param", "factKey"],
       "additionalProperties": false
     }
   },

@@ -14,11 +14,7 @@
         },
         "actor": {
           "type": "string",
-          "enum": [
-            "model",
-            "user",
-            "system"
-          ]
+          "enum": ["model", "user", "system"]
         },
         "event": {
           "anyOf": [
@@ -39,10 +35,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "t",
-                "runId"
-              ],
+              "required": ["t", "runId"],
               "additionalProperties": false
             },
             {
@@ -65,11 +58,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "stepId"
-              ],
+              "required": ["t", "runId", "stepId"],
               "additionalProperties": false
             },
             {
@@ -127,11 +116,7 @@
                     },
                     "kind": {
                       "type": "string",
-                      "enum": [
-                        "observed",
-                        "derived",
-                        "receipt"
-                      ]
+                      "enum": ["observed", "derived", "receipt"]
                     },
                     "derivedFrom": {
                       "type": "array",
@@ -141,11 +126,7 @@
                     },
                     "riskClass": {
                       "type": "string",
-                      "enum": [
-                        "low",
-                        "normal",
-                        "high"
-                      ]
+                      "enum": ["low", "normal", "high"]
                     },
                     "source": {
                       "type": "object",
@@ -164,10 +145,7 @@
                           "format": "date-time"
                         }
                       },
-                      "required": [
-                        "system",
-                        "retrievedAt"
-                      ],
+                      "required": ["system", "retrievedAt"],
                       "additionalProperties": false
                     },
                     "observedAt": {
@@ -198,11 +176,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "fact"
-              ],
+              "required": ["t", "runId", "fact"],
               "additionalProperties": false
             },
             {
@@ -249,11 +223,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "type",
-                              "param",
-                              "factId"
-                            ],
+                            "required": ["type", "param", "factId"],
                             "additionalProperties": false
                           },
                           {
@@ -271,11 +241,7 @@
                                 "type": "string"
                               }
                             },
-                            "required": [
-                              "type",
-                              "param",
-                              "decidedBy"
-                            ],
+                            "required": ["type", "param", "decidedBy"],
                             "additionalProperties": false
                           }
                         ]
@@ -286,19 +252,11 @@
                     },
                     "proposedBy": {
                       "type": "string",
-                      "enum": [
-                        "model",
-                        "user",
-                        "sop"
-                      ]
+                      "enum": ["model", "user", "sop"]
                     },
                     "checkpoint": {
                       "type": "string",
-                      "enum": [
-                        "show",
-                        "notify",
-                        "confirm"
-                      ]
+                      "enum": ["show", "notify", "confirm"]
                     },
                     "status": {
                       "type": "string",
@@ -340,11 +298,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intent"
-              ],
+              "required": ["t", "runId", "intent"],
               "additionalProperties": false
             },
             {
@@ -396,11 +350,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "batch"
-              ],
+              "required": ["t", "runId", "batch"],
               "additionalProperties": false
             },
             {
@@ -418,23 +368,13 @@
                 },
                 "policy": {
                   "type": "string",
-                  "enum": [
-                    "show",
-                    "notify",
-                    "confirm"
-                  ]
+                  "enum": ["show", "notify", "confirm"]
                 },
                 "escalatedByModel": {
                   "type": "boolean"
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intentId",
-                "policy",
-                "escalatedByModel"
-              ],
+              "required": ["t", "runId", "intentId", "policy", "escalatedByModel"],
               "additionalProperties": false
             },
             {
@@ -452,11 +392,7 @@
                 },
                 "decision": {
                   "type": "string",
-                  "enum": [
-                    "approve",
-                    "edit",
-                    "reject"
-                  ]
+                  "enum": ["approve", "edit", "reject"]
                 },
                 "decidedBy": {
                   "type": "string"
@@ -468,13 +404,7 @@
                   }
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intentId",
-                "decision",
-                "decidedBy"
-              ],
+              "required": ["t", "runId", "intentId", "decision", "decidedBy"],
               "additionalProperties": false
             },
             {
@@ -492,10 +422,7 @@
                 },
                 "result": {
                   "type": "string",
-                  "enum": [
-                    "pass",
-                    "stale"
-                  ]
+                  "enum": ["pass", "stale"]
                 },
                 "changedFactIds": {
                   "type": "array",
@@ -504,12 +431,7 @@
                   }
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intentId",
-                "result"
-              ],
+              "required": ["t", "runId", "intentId", "result"],
               "additionalProperties": false
             },
             {
@@ -529,12 +451,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intentId",
-                "idempotencyKey"
-              ],
+              "required": ["t", "runId", "intentId", "idempotencyKey"],
               "additionalProperties": false
             },
             {
@@ -555,12 +472,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "confirmed",
-                        "failed",
-                        "unknown",
-                        "pending"
-                      ]
+                      "enum": ["confirmed", "failed", "unknown", "pending"]
                     },
                     "externalRef": {
                       "type": "string"
@@ -579,21 +491,11 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "intentId",
-                    "status",
-                    "rawHash",
-                    "recordedAt",
-                    "signature"
-                  ],
+                  "required": ["intentId", "status", "rawHash", "recordedAt", "signature"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "receipt"
-              ],
+              "required": ["t", "runId", "receipt"],
               "additionalProperties": false
             },
             {
@@ -611,18 +513,10 @@
                 },
                 "finalStatus": {
                   "type": "string",
-                  "enum": [
-                    "confirmed",
-                    "failed"
-                  ]
+                  "enum": ["confirmed", "failed"]
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "intentId",
-                "finalStatus"
-              ],
+              "required": ["t", "runId", "intentId", "finalStatus"],
               "additionalProperties": false
             },
             {
@@ -643,19 +537,10 @@
                 },
                 "channel": {
                   "type": "string",
-                  "enum": [
-                    "chat",
-                    "voice"
-                  ]
+                  "enum": ["chat", "voice"]
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "outputRef",
-                "text",
-                "channel"
-              ],
+              "required": ["t", "runId", "outputRef", "text", "channel"],
               "additionalProperties": false
             },
             {
@@ -676,47 +561,25 @@
                     },
                     "claimType": {
                       "type": "string",
-                      "enum": [
-                        "number",
-                        "currency",
-                        "datetime",
-                        "entity",
-                        "status_assertion"
-                      ]
+                      "enum": ["number", "currency", "datetime", "entity", "status_assertion"]
                     },
                     "verdict": {
                       "type": "string",
-                      "enum": [
-                        "matched",
-                        "mismatch",
-                        "unsupported_inference"
-                      ]
+                      "enum": ["matched", "mismatch", "unsupported_inference"]
                     },
                     "factId": {
                       "type": "string"
                     },
                     "channel": {
                       "type": "string",
-                      "enum": [
-                        "chat",
-                        "voice"
-                      ]
+                      "enum": ["chat", "voice"]
                     }
                   },
-                  "required": [
-                    "claimText",
-                    "claimType",
-                    "verdict",
-                    "channel"
-                  ],
+                  "required": ["claimText", "claimType", "verdict", "channel"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "finding"
-              ],
+              "required": ["t", "runId", "finding"],
               "additionalProperties": false
             },
             {
@@ -751,30 +614,18 @@
                           "minimum": 0
                         }
                       },
-                      "required": [
-                        "matched",
-                        "mismatch",
-                        "unsupported_inference"
-                      ],
+                      "required": ["matched", "mismatch", "unsupported_inference"],
                       "additionalProperties": false
                     },
                     "noCheckableClaims": {
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "outputRef",
-                    "counts",
-                    "noCheckableClaims"
-                  ],
+                  "required": ["outputRef", "counts", "noCheckableClaims"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "summary"
-              ],
+              "required": ["t", "runId", "summary"],
               "additionalProperties": false
             },
             {
@@ -791,11 +642,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "reason"
-              ],
+              "required": ["t", "runId", "reason"],
               "additionalProperties": false
             },
             {
@@ -809,10 +656,7 @@
                   "$ref": "#/definitions/EventEnvelope/properties/event/anyOf/0/properties/runId"
                 }
               },
-              "required": [
-                "t",
-                "runId"
-              ],
+              "required": ["t", "runId"],
               "additionalProperties": false
             },
             {
@@ -826,10 +670,7 @@
                   "$ref": "#/definitions/EventEnvelope/properties/event/anyOf/0/properties/runId"
                 }
               },
-              "required": [
-                "t",
-                "runId"
-              ],
+              "required": ["t", "runId"],
               "additionalProperties": false
             },
             {
@@ -846,22 +687,13 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "t",
-                "runId",
-                "reason"
-              ],
+              "required": ["t", "runId", "reason"],
               "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "seq",
-        "at",
-        "actor",
-        "event"
-      ],
+      "required": ["seq", "at", "actor", "event"],
       "additionalProperties": false
     }
   },

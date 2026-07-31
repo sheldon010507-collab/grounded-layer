@@ -18,10 +18,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "system",
-        "retrievedAt"
-      ],
+      "required": ["system", "retrievedAt"],
       "additionalProperties": false
     }
   },

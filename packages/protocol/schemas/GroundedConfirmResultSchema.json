@@ -20,12 +20,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "confirmed",
-                        "failed",
-                        "unknown",
-                        "pending"
-                      ]
+                      "enum": ["confirmed", "failed", "unknown", "pending"]
                     },
                     "externalRef": {
                       "type": "string"
@@ -44,20 +39,11 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "intentId",
-                    "status",
-                    "rawHash",
-                    "recordedAt",
-                    "signature"
-                  ],
+                  "required": ["intentId", "status", "rawHash", "recordedAt", "signature"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "receipt"
-              ],
+              "required": ["kind", "receipt"],
               "additionalProperties": false
             },
             {
@@ -81,11 +67,7 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "intentId",
-                "version"
-              ],
+              "required": ["kind", "intentId", "version"],
               "additionalProperties": false
             },
             {
@@ -99,10 +81,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "kind",
-                "reason"
-              ],
+              "required": ["kind", "reason"],
               "additionalProperties": false
             }
           ]
@@ -119,10 +98,7 @@
               "minimum": 0
             }
           },
-          "required": [
-            "kind",
-            "currentVersion"
-          ],
+          "required": ["kind", "currentVersion"],
           "additionalProperties": false
         },
         {
@@ -139,11 +115,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "kind",
-            "intentId",
-            "status"
-          ],
+          "required": ["kind", "intentId", "status"],
           "additionalProperties": false
         }
       ]

@@ -68,25 +68,13 @@
                   },
                   "valueType": {
                     "type": "string",
-                    "enum": [
-                      "string",
-                      "number",
-                      "boolean",
-                      "null",
-                      "complex"
-                    ]
+                    "enum": ["string", "number", "boolean", "null", "complex"]
                   },
                   "requiresRatification": {
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "param",
-                  "label",
-                  "editable",
-                  "valueType",
-                  "requiresRatification"
-                ],
+                "required": ["param", "label", "editable", "valueType", "requiresRatification"],
                 "additionalProperties": false
               }
             },
@@ -97,11 +85,7 @@
               }
             }
           },
-          "required": [
-            "type",
-            "toolTitle",
-            "args"
-          ],
+          "required": ["type", "toolTitle", "args"],
           "additionalProperties": false
         }
       },

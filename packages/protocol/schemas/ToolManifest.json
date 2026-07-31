@@ -16,18 +16,11 @@
         },
         "reversibility": {
           "type": "string",
-          "enum": [
-            "reversible",
-            "compensatable",
-            "irreversible"
-          ]
+          "enum": ["reversible", "compensatable", "irreversible"]
         },
         "externality": {
           "type": "string",
-          "enum": [
-            "internal",
-            "external"
-          ]
+          "enum": ["internal", "external"]
         },
         "producesReceipt": {
           "type": "boolean"
@@ -41,17 +34,11 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "enum": [
-                    "observed",
-                    "receipt",
-                    "user"
-                  ]
+                  "enum": ["observed", "receipt", "user"]
                 }
               }
             },
-            "required": [
-              "allowKinds"
-            ],
+            "required": ["allowKinds"],
             "additionalProperties": false
           },
           "default": {}
@@ -74,12 +61,7 @@
                   "type": "object",
                   "additionalProperties": {
                     "type": "string",
-                    "enum": [
-                      "exact",
-                      "numeric_tolerance",
-                      "time_tolerance",
-                      "etag"
-                    ]
+                    "enum": ["exact", "numeric_tolerance", "time_tolerance", "etag"]
                   },
                   "default": {}
                 },
@@ -87,11 +69,7 @@
                   "type": "number"
                 }
               },
-              "required": [
-                "toolRef",
-                "compareKeys",
-                "maxAgeMs"
-              ],
+              "required": ["toolRef", "compareKeys", "maxAgeMs"],
               "additionalProperties": false
             },
             {
@@ -107,11 +85,7 @@
         },
         "settlement": {
           "type": "string",
-          "enum": [
-            "sync",
-            "webhook",
-            "poll"
-          ],
+          "enum": ["sync", "webhook", "poll"],
           "default": "sync"
         },
         "ap2": {

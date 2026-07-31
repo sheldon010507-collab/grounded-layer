@@ -3,15 +3,7 @@
   "definitions": {
     "IntentStatus": {
       "type": "string",
-      "enum": [
-        "proposed",
-        "approved",
-        "rejected",
-        "revalidating",
-        "stale",
-        "executing",
-        "settled"
-      ]
+      "enum": ["proposed", "approved", "rejected", "revalidating", "stale", "executing", "settled"]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"
