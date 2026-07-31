@@ -1,0 +1,14 @@
+{
+  "$ref": "#/definitions/ConfirmationScalar",
+  "definitions": {
+    "ConfirmationScalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

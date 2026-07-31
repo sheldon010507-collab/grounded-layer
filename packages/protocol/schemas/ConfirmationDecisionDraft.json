@@ -1,0 +1,87 @@
+{
+  "$ref": "#/definitions/ConfirmationDecisionDraft",
+  "definitions": {
+    "ConfirmationDecisionDraft": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "confirmationToken": {
+              "type": "string"
+            },
+            "decision": {
+              "type": "string",
+              "const": "approve"
+            }
+          },
+          "required": [
+            "confirmationToken",
+            "decision"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "confirmationToken": {
+              "type": "string"
+            },
+            "decision": {
+              "type": "string",
+              "const": "edit"
+            },
+            "edits": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "param": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "param",
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "confirmationToken",
+            "decision",
+            "edits"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "confirmationToken": {
+              "type": "string"
+            },
+            "decision": {
+              "type": "string",
+              "const": "reject"
+            }
+          },
+          "required": [
+            "confirmationToken",
+            "decision"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

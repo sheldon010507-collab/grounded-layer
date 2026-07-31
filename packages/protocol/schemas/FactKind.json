@@ -1,0 +1,14 @@
+{
+  "$ref": "#/definitions/FactKind",
+  "definitions": {
+    "FactKind": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "derived",
+        "receipt"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

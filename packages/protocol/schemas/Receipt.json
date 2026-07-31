@@ -1,0 +1,47 @@
+{
+  "$ref": "#/definitions/Receipt",
+  "definitions": {
+    "Receipt": {
+      "type": "object",
+      "properties": {
+        "intentId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "confirmed",
+            "failed",
+            "unknown",
+            "pending"
+          ]
+        },
+        "externalRef": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "rawHash": {
+          "type": "string"
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signature": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "intentId",
+        "status",
+        "rawHash",
+        "recordedAt",
+        "signature"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

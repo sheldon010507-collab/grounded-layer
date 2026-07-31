@@ -1,0 +1,46 @@
+{
+  "$ref": "#/definitions/AuditSummary",
+  "definitions": {
+    "AuditSummary": {
+      "type": "object",
+      "properties": {
+        "outputRef": {
+          "type": "string"
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "matched": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "mismatch": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unsupported_inference": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "matched",
+            "mismatch",
+            "unsupported_inference"
+          ],
+          "additionalProperties": false
+        },
+        "noCheckableClaims": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "outputRef",
+        "counts",
+        "noCheckableClaims"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

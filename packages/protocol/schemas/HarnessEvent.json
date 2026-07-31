@@ -1,0 +1,841 @@
+{
+  "$ref": "#/definitions/HarnessEvent",
+  "definitions": {
+    "HarnessEvent": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "run.created"
+            },
+            "runId": {
+              "type": "string"
+            },
+            "goal": {
+              "type": "string"
+            },
+            "sopRef": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "runId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "step.planned"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "stepId": {
+              "type": "string"
+            },
+            "toolRef": {
+              "type": "string"
+            },
+            "plannerRationale": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "stepId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "fact.observed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "fact": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^fact_[a-z0-9]{12}$"
+                },
+                "runId": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "entityRef": {
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "array",
+                      "items": {}
+                    }
+                  ]
+                },
+                "itemSchema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "observed",
+                    "derived",
+                    "receipt"
+                  ]
+                },
+                "derivedFrom": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "riskClass": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "normal",
+                    "high"
+                  ]
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "system": {
+                      "type": "string"
+                    },
+                    "recordId": {
+                      "type": "string"
+                    },
+                    "field": {
+                      "type": "string"
+                    },
+                    "retrievedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "system",
+                    "retrievedAt"
+                  ],
+                  "additionalProperties": false
+                },
+                "observedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "etag": {
+                  "type": "string"
+                },
+                "supersededBy": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "runId",
+                "key",
+                "value",
+                "kind",
+                "riskClass",
+                "source",
+                "observedAt"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "fact"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "intent.proposed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intent": {
+              "type": "object",
+              "properties": {
+                "intentId": {
+                  "type": "string",
+                  "pattern": "^int_[a-z0-9]{12}$"
+                },
+                "runId": {
+                  "type": "string"
+                },
+                "planId": {
+                  "type": "string"
+                },
+                "toolRef": {
+                  "type": "string"
+                },
+                "args": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "fact"
+                          },
+                          "param": {
+                            "type": "string"
+                          },
+                          "factId": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "param",
+                          "factId"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "user"
+                          },
+                          "param": {
+                            "type": "string"
+                          },
+                          "userValue": {},
+                          "decidedBy": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "param",
+                          "decidedBy"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "idempotencyKey": {
+                  "type": "string"
+                },
+                "proposedBy": {
+                  "type": "string",
+                  "enum": [
+                    "model",
+                    "user",
+                    "sop"
+                  ]
+                },
+                "checkpoint": {
+                  "type": "string",
+                  "enum": [
+                    "show",
+                    "notify",
+                    "confirm"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "proposed",
+                    "approved",
+                    "rejected",
+                    "revalidating",
+                    "stale",
+                    "executing",
+                    "settled"
+                  ]
+                },
+                "batchId": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "requiresRatification": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "intentId",
+                "runId",
+                "toolRef",
+                "args",
+                "idempotencyKey",
+                "proposedBy",
+                "checkpoint",
+                "status",
+                "version"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intent"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "batch.proposed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "batch": {
+              "type": "object",
+              "properties": {
+                "batchId": {
+                  "type": "string",
+                  "pattern": "^bat_[a-z0-9]{12}$"
+                },
+                "runId": {
+                  "type": "string"
+                },
+                "toolRef": {
+                  "type": "string"
+                },
+                "templateDesc": {
+                  "type": "string"
+                },
+                "itemIntentIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 2
+                },
+                "checkpoint": {
+                  "type": "string",
+                  "const": "confirm"
+                }
+              },
+              "required": [
+                "batchId",
+                "runId",
+                "toolRef",
+                "templateDesc",
+                "itemIntentIds",
+                "checkpoint"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "batch"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "checkpoint.raised"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intentId": {
+              "type": "string"
+            },
+            "policy": {
+              "type": "string",
+              "enum": [
+                "show",
+                "notify",
+                "confirm"
+              ]
+            },
+            "escalatedByModel": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intentId",
+            "policy",
+            "escalatedByModel"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "user.decided"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intentId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/5/properties/intentId"
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "approve",
+                "edit",
+                "reject"
+              ]
+            },
+            "decidedBy": {
+              "type": "string"
+            },
+            "editedArgs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HarnessEvent/anyOf/3/properties/intent/properties/args/items"
+              }
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intentId",
+            "decision",
+            "decidedBy"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "revalidation"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intentId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/5/properties/intentId"
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "stale"
+              ]
+            },
+            "changedFactIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intentId",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "execution.started"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intentId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/5/properties/intentId"
+            },
+            "idempotencyKey": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intentId",
+            "idempotencyKey"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "receipt.recorded"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "receipt": {
+              "type": "object",
+              "properties": {
+                "intentId": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "confirmed",
+                    "failed",
+                    "unknown",
+                    "pending"
+                  ]
+                },
+                "externalRef": {
+                  "type": "string"
+                },
+                "errorCode": {
+                  "type": "string"
+                },
+                "rawHash": {
+                  "type": "string"
+                },
+                "recordedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "signature": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "intentId",
+                "status",
+                "rawHash",
+                "recordedAt",
+                "signature"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "receipt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "receipt.settled"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "intentId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/5/properties/intentId"
+            },
+            "finalStatus": {
+              "type": "string",
+              "enum": [
+                "confirmed",
+                "failed"
+              ]
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "intentId",
+            "finalStatus"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "model.output"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "outputRef": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "channel": {
+              "type": "string",
+              "enum": [
+                "chat",
+                "voice"
+              ]
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "outputRef",
+            "text",
+            "channel"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "audit.finding"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "finding": {
+              "type": "object",
+              "properties": {
+                "claimText": {
+                  "type": "string"
+                },
+                "claimType": {
+                  "type": "string",
+                  "enum": [
+                    "number",
+                    "currency",
+                    "datetime",
+                    "entity",
+                    "status_assertion"
+                  ]
+                },
+                "verdict": {
+                  "type": "string",
+                  "enum": [
+                    "matched",
+                    "mismatch",
+                    "unsupported_inference"
+                  ]
+                },
+                "factId": {
+                  "type": "string"
+                },
+                "channel": {
+                  "type": "string",
+                  "enum": [
+                    "chat",
+                    "voice"
+                  ]
+                }
+              },
+              "required": [
+                "claimText",
+                "claimType",
+                "verdict",
+                "channel"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "finding"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "audit.summary"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "summary": {
+              "type": "object",
+              "properties": {
+                "outputRef": {
+                  "type": "string"
+                },
+                "counts": {
+                  "type": "object",
+                  "properties": {
+                    "matched": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "mismatch": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "unsupported_inference": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  "required": [
+                    "matched",
+                    "mismatch",
+                    "unsupported_inference"
+                  ],
+                  "additionalProperties": false
+                },
+                "noCheckableClaims": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "outputRef",
+                "counts",
+                "noCheckableClaims"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "summary"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "run.suspended"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "run.resumed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            }
+          },
+          "required": [
+            "t",
+            "runId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "run.completed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            }
+          },
+          "required": [
+            "t",
+            "runId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "string",
+              "const": "run.failed"
+            },
+            "runId": {
+              "$ref": "#/definitions/HarnessEvent/anyOf/0/properties/runId"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "t",
+            "runId",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

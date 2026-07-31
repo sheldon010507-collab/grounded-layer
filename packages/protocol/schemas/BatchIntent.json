@@ -1,0 +1,44 @@
+{
+  "$ref": "#/definitions/BatchIntent",
+  "definitions": {
+    "BatchIntent": {
+      "type": "object",
+      "properties": {
+        "batchId": {
+          "type": "string",
+          "pattern": "^bat_[a-z0-9]{12}$"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "toolRef": {
+          "type": "string"
+        },
+        "templateDesc": {
+          "type": "string"
+        },
+        "itemIntentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2
+        },
+        "checkpoint": {
+          "type": "string",
+          "const": "confirm"
+        }
+      },
+      "required": [
+        "batchId",
+        "runId",
+        "toolRef",
+        "templateDesc",
+        "itemIntentIds",
+        "checkpoint"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,29 @@
+{
+  "$ref": "#/definitions/FactSource",
+  "definitions": {
+    "FactSource": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "type": "string"
+        },
+        "recordId": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "system",
+        "retrievedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

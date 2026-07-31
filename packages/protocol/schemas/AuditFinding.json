@@ -1,0 +1,49 @@
+{
+  "$ref": "#/definitions/AuditFinding",
+  "definitions": {
+    "AuditFinding": {
+      "type": "object",
+      "properties": {
+        "claimText": {
+          "type": "string"
+        },
+        "claimType": {
+          "type": "string",
+          "enum": [
+            "number",
+            "currency",
+            "datetime",
+            "entity",
+            "status_assertion"
+          ]
+        },
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "matched",
+            "mismatch",
+            "unsupported_inference"
+          ]
+        },
+        "factId": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string",
+          "enum": [
+            "chat",
+            "voice"
+          ]
+        }
+      },
+      "required": [
+        "claimText",
+        "claimType",
+        "verdict",
+        "channel"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

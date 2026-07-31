@@ -1,0 +1,137 @@
+{
+  "$ref": "#/definitions/ToolManifest",
+  "definitions": {
+    "ToolManifest": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "reversibility": {
+          "type": "string",
+          "enum": [
+            "reversible",
+            "compensatable",
+            "irreversible"
+          ]
+        },
+        "externality": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external"
+          ]
+        },
+        "producesReceipt": {
+          "type": "boolean"
+        },
+        "paramPolicy": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "allowKinds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "observed",
+                    "receipt",
+                    "user"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "allowKinds"
+            ],
+            "additionalProperties": false
+          },
+          "default": {}
+        },
+        "revalidate": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "toolRef": {
+                  "type": "string"
+                },
+                "compareKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "compare": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string",
+                    "enum": [
+                      "exact",
+                      "numeric_tolerance",
+                      "time_tolerance",
+                      "etag"
+                    ]
+                  },
+                  "default": {}
+                },
+                "maxAgeMs": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "toolRef",
+                "compareKeys",
+                "maxAgeMs"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "providerIdempotencySupport": {
+          "type": "boolean"
+        },
+        "conditionalExecution": {
+          "type": "boolean"
+        },
+        "settlement": {
+          "type": "string",
+          "enum": [
+            "sync",
+            "webhook",
+            "poll"
+          ],
+          "default": "sync"
+        },
+        "ap2": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "ref",
+        "title",
+        "inputSchema",
+        "reversibility",
+        "externality",
+        "producesReceipt",
+        "revalidate",
+        "providerIdempotencySupport",
+        "conditionalExecution"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

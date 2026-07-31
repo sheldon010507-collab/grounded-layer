@@ -1,0 +1,27 @@
+{
+  "$ref": "#/definitions/ConfirmationEdit",
+  "definitions": {
+    "ConfirmationEdit": {
+      "type": "object",
+      "properties": {
+        "param": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "param",
+        "value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

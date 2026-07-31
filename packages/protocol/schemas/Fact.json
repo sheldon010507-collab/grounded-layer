@@ -1,0 +1,121 @@
+{
+  "$ref": "#/definitions/Fact",
+  "definitions": {
+    "Fact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^fact_[a-z0-9]{12}$"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "entityRef": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {}
+            }
+          ]
+        },
+        "itemSchema": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "unit": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "derived",
+            "receipt"
+          ]
+        },
+        "derivedFrom": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskClass": {
+          "type": "string",
+          "enum": [
+            "low",
+            "normal",
+            "high"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string"
+            },
+            "recordId": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string"
+            },
+            "retrievedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "system",
+            "retrievedAt"
+          ],
+          "additionalProperties": false
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "supersededBy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "runId",
+        "key",
+        "value",
+        "kind",
+        "riskClass",
+        "source",
+        "observedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
