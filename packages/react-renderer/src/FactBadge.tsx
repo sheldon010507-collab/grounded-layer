@@ -2,9 +2,11 @@
 
 import type { Fact } from "@grounded/protocol";
 import { useState } from "react";
+import type { RendererLocale } from "./format.js";
 
 export interface FactBadgeProps {
   fact: Fact;
+  locale?: RendererLocale;
 }
 
 interface KindStyle {
@@ -37,6 +39,12 @@ const KIND_STYLE: Record<Fact["kind"], KindStyle> = {
   },
 };
 
+const EN_KIND_LABEL: Record<Fact["kind"], string> = {
+  observed: "Verified",
+  derived: "Model-derived · unverified",
+  receipt: "Receipt",
+};
+
 function isStale(fact: Fact): boolean {
   if (fact.supersededBy) return true;
   if (fact.expiresAt && new Date(fact.expiresAt).getTime() < Date.now()) return true;
@@ -44,7 +52,7 @@ function isStale(fact: Fact): boolean {
 }
 
 /** hover 显示 system/retrievedAt/expiresAt/riskClass(Part E.9)。 */
-export function FactBadge({ fact }: FactBadgeProps) {
+export function FactBadge({ fact, locale = "zh" }: FactBadgeProps) {
   const [hovered, setHovered] = useState(false);
   const style = KIND_STYLE[fact.kind];
   const stale = isStale(fact);
@@ -73,8 +81,8 @@ export function FactBadge({ fact }: FactBadgeProps) {
           cursor: "default",
         }}
       >
-        {style.label}
-        {stale && <span aria-hidden="true"> · 已过期</span>}
+        {locale === "en" ? EN_KIND_LABEL[fact.kind] : style.label}
+        {stale && <span aria-hidden="true"> · {locale === "en" ? "Stale" : "已过期"}</span>}
       </button>
       {hovered && (
         <span
@@ -88,31 +96,31 @@ export function FactBadge({ fact }: FactBadgeProps) {
             borderStyle: "solid",
           }}
         >
-          <FactBadgeTooltipBody fact={fact} />
+          <FactBadgeTooltipBody fact={fact} locale={locale} />
         </span>
       )}
     </span>
   );
 }
 
-function FactBadgeTooltipBody({ fact }: { fact: Fact }) {
+function FactBadgeTooltipBody({ fact, locale }: { fact: Fact; locale: RendererLocale }) {
   return (
     <dl className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5">
-      <dt className="opacity-70">来源</dt>
+      <dt className="opacity-70">{locale === "en" ? "Source" : "来源"}</dt>
       <dd>{fact.source.system}</dd>
-      <dt className="opacity-70">获取时间</dt>
+      <dt className="opacity-70">{locale === "en" ? "Retrieved" : "获取时间"}</dt>
       <dd>{fact.source.retrievedAt}</dd>
       {fact.expiresAt && (
         <>
-          <dt className="opacity-70">过期时间</dt>
+          <dt className="opacity-70">{locale === "en" ? "Expires" : "过期时间"}</dt>
           <dd>{fact.expiresAt}</dd>
         </>
       )}
-      <dt className="opacity-70">风险级</dt>
+      <dt className="opacity-70">{locale === "en" ? "Risk" : "风险级"}</dt>
       <dd>{fact.riskClass}</dd>
       {fact.kind === "derived" && fact.derivedFrom && (
         <>
-          <dt className="opacity-70">推导自</dt>
+          <dt className="opacity-70">{locale === "en" ? "Derived from" : "推导自"}</dt>
           <dd>{fact.derivedFrom.join(", ")}</dd>
         </>
       )}
