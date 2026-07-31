@@ -1,0 +1,36 @@
+name: Release public packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm test
+      - name: Publish protocol packages with npm trusted publishing
+        run: |
+          pnpm --filter @grounded/protocol publish --no-git-checks
+          pnpm --filter @grounded/react-renderer publish --no-git-checks
+          pnpm --filter @grounded/agui-bridge publish --no-git-checks
+          pnpm --filter @grounded/client publish --no-git-checks
+          pnpm --filter @grounded/conformance publish --no-git-checks

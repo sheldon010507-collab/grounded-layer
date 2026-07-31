@@ -4,6 +4,10 @@
   "description": "Grounded Layer 核心协议:Fact/Intent/BatchIntent/Receipt/ToolManifest/HarnessEvent 的 Zod 定义与 JSON Schema 产物",
   "type": "module",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

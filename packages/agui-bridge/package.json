@@ -2,6 +2,10 @@
   "name": "@grounded/agui-bridge",
   "version": "0.1.0",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "description": "HarnessEvent → AG-UI 事件桥接:生命周期事件映射到标准 RUN_STARTED/RUN_FINISHED/RUN_ERROR,Grounded 专有事件走 CUSTOM 原样透传(Part E.8)",
   "type": "module",
   "main": "./dist/index.js",

@@ -36,3 +36,7 @@ Code is Apache-2.0. The protocol specification in `docs/spec/` is CC BY 4.0. Gro
 ## Status
 
 The public packages are a beta protocol release (`1.0.0-rc.0` for the protocol package). The schema is versioned and changes are documented before a stable release.
+
+## Publishing
+
+Tagged releases use npm trusted publishing (OIDC); no npm token is stored in GitHub. Before creating the first tag, the package owners must configure the five `@grounded/*` packages and their GitHub workflow as trusted publishers in npm. If the scope is not available to the owner, choose a different public scope before tagging.

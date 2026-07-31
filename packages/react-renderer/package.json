@@ -2,6 +2,10 @@
   "name": "@grounded/react-renderer",
   "version": "0.1.0",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "description": "卡片组件 + Fact 徽章;状态机由事件投影驱动,组件不持有业务状态",
   "type": "module",
   "main": "./dist/index.js",
