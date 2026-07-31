@@ -94,6 +94,34 @@ describe("FactCard (SSR smoke)", () => {
   });
 });
 
+describe("English locale", () => {
+  it("renders English labels for the public playground cards", () => {
+    const factBadge = renderToStaticMarkup(<FactBadge fact={observedFact} locale="en" />);
+    const confirmation = renderToStaticMarkup(
+      <BoundActionConfirmationCard envelope={demoEnvelope()} locale="en" onDecide={() => {}} />,
+    );
+    const receipt = renderToStaticMarkup(
+      <ReceiptCard receipt={confirmedReceipt} locale="en" toolTitle="Update booking" />,
+    );
+    const stale = renderToStaticMarkup(
+      <StaleNotice
+        toolTitle="Update booking"
+        changes={[{ label: "Room price", oldFact: oldPriceFact, newFact: newPriceFact }]}
+        locale="en"
+      />,
+    );
+
+    expect(factBadge).toContain("Verified");
+    expect(confirmation).toContain("Needs review");
+    expect(confirmation).toContain("Approve");
+    expect(confirmation).toContain("Reject");
+    expect(receipt).toContain("Confirmed");
+    expect(receipt).toContain("Recorded");
+    expect(stale).toContain("Data changed");
+    expect(stale).toContain("Reconfirm with new values");
+  });
+});
+
 describe("ActionConfirmationCard (SSR smoke)", () => {
   it("pins a ratification-required param, labeled for user review, editable", () => {
     const html = renderToStaticMarkup(

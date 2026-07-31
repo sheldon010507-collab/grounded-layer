@@ -2,7 +2,7 @@
 
 import type { Fact } from "@grounded/protocol";
 import { FactBadge } from "./FactBadge.js";
-import { type FactFormat, formatFactValue } from "./format.js";
+import { type FactFormat, type RendererLocale, formatFactValue } from "./format.js";
 
 export interface StaleChange {
   label: string;
@@ -17,13 +17,20 @@ export interface StaleNoticeProps {
   /** 用新值重新确认——旧 Intent 已作废,这通常意味着重新走一遍 propose(Part B.2)。 */
   onReconfirm?: () => void;
   onCancel?: () => void;
+  locale?: RendererLocale;
 }
 
 /**
  * 新旧值对比,要求重新确认(Part B.2:"stale 态,新旧值对比,要求重新确认;旧 Intent 作废")。
  * 复用 unknown 的琥珀色调——都是"结果不确定,需要人看一眼"这一类状态。
  */
-export function StaleNotice({ toolTitle, changes, onReconfirm, onCancel }: StaleNoticeProps) {
+export function StaleNotice({
+  toolTitle,
+  changes,
+  onReconfirm,
+  onCancel,
+  locale = "zh",
+}: StaleNoticeProps) {
   return (
     <div
       className="flex flex-col gap-3 rounded-lg p-3"
@@ -49,10 +56,14 @@ export function StaleNotice({ toolTitle, changes, onReconfirm, onCancel }: Stale
         >
           ⚠
         </span>
-        <h3 className="text-sm font-semibold">{toolTitle} · 数据已过期</h3>
+        <h3 className="text-sm font-semibold">
+          {toolTitle} · {locale === "en" ? "Data changed" : "数据已过期"}
+        </h3>
       </div>
       <p className="text-xs" style={{ color: "var(--grounded-text-muted)" }}>
-        你确认之后,下面这些值发生了变化——请核对新值再决定是否继续。这次确认已作废。
+        {locale === "en"
+          ? "These values changed after you reviewed the action. Check the new values before deciding whether to continue. The previous confirmation is no longer valid."
+          : "你确认之后,下面这些值发生了变化——请核对新值再决定是否继续。这次确认已作废。"}
       </p>
 
       <dl className="flex flex-col gap-2">
@@ -67,17 +78,17 @@ export function StaleNotice({ toolTitle, changes, onReconfirm, onCancel }: Stale
             </dt>
             <dd className="flex flex-wrap items-center gap-2 text-sm">
               <span style={{ textDecoration: "line-through", color: "var(--grounded-text-muted)" }}>
-                {formatFactValue(change.oldFact, change.format)}
+                {formatFactValue(change.oldFact, change.format, locale)}
               </span>
-              <FactBadge fact={change.oldFact} />
+              <FactBadge fact={change.oldFact} locale={locale} />
               <span aria-hidden="true">→</span>
               <span
                 className="font-semibold"
                 style={{ color: "var(--grounded-status-unknown-text)" }}
               >
-                {formatFactValue(change.newFact, change.format)}
+                {formatFactValue(change.newFact, change.format, locale)}
               </span>
-              <FactBadge fact={change.newFact} />
+              <FactBadge fact={change.newFact} locale={locale} />
             </dd>
           </div>
         ))}
@@ -96,7 +107,7 @@ export function StaleNotice({ toolTitle, changes, onReconfirm, onCancel }: Stale
             color: "var(--grounded-status-confirmed-text)",
           }}
         >
-          用新值重新确认
+          {locale === "en" ? "Reconfirm with new values" : "用新值重新确认"}
         </button>
         <button
           type="button"
@@ -110,7 +121,7 @@ export function StaleNotice({ toolTitle, changes, onReconfirm, onCancel }: Stale
             color: "var(--grounded-text-muted)",
           }}
         >
-          取消
+          {locale === "en" ? "Cancel" : "取消"}
         </button>
       </div>
     </div>

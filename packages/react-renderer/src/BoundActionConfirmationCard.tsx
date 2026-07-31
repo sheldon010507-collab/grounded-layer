@@ -9,7 +9,7 @@ import type {
 } from "@grounded/protocol";
 import { useState } from "react";
 import { FactBadge } from "./FactBadge.js";
-import { formatFactValue } from "./format.js";
+import { type RendererLocale, formatFactValue } from "./format.js";
 
 export interface BoundActionConfirmationCardProps {
   /** 服务端签发的确认信封(`issueConfirmation`/`submitIntent` 的 `awaiting_confirmation`
@@ -25,6 +25,7 @@ export interface BoundActionConfirmationCardProps {
   expired?: boolean;
   onRefetch?: () => void;
   disabled?: boolean;
+  locale?: RendererLocale;
 }
 
 function initialValue(arg: CompiledActionArg): ConfirmationScalar | undefined {
@@ -106,6 +107,7 @@ export function BoundActionConfirmationCard({
   expired,
   onRefetch,
   disabled,
+  locale = "zh",
 }: BoundActionConfirmationCardProps) {
   const { card } = envelope;
   const [edited, setEdited] = useState<Record<string, ConfirmationScalar>>({});
@@ -163,13 +165,21 @@ export function BoundActionConfirmationCard({
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold">{card.toolTitle}</h3>
         <span className="text-xs" style={{ color: "var(--grounded-text-muted)" }}>
-          {expired ? "已过期" : "需要确认"}
+          {expired
+            ? locale === "en"
+              ? "Expired"
+              : "已过期"
+            : locale === "en"
+              ? "Needs review"
+              : "需要确认"}
         </span>
       </div>
 
       {expired && (
         <p className="text-xs" style={{ color: "var(--grounded-status-unknown-text)" }}>
-          这份确认已经不再有效(可能已经被别处决定,或绑定的值发生了变化)——请重新拉取最新状态。
+          {locale === "en"
+            ? "This confirmation is no longer valid. The action may have been decided elsewhere, or its bound facts changed. Refresh to load the latest state."
+            : "这份确认已经不再有效(可能已经被别处决定,或绑定的值发生了变化)——请重新拉取最新状态。"}
         </p>
       )}
 
@@ -200,12 +210,15 @@ export function BoundActionConfirmationCard({
                   }}
                 >
                   {arg.label}
-                  {pinned && " · 从你的消息提取 · 请核对"}
+                  {pinned &&
+                    (locale === "en"
+                      ? " · Extracted from your message · Review"
+                      : " · 从你的消息提取 · 请核对")}
                 </dt>
-                {arg.fact && <FactBadge fact={arg.fact} />}
+                {arg.fact && <FactBadge fact={arg.fact} locale={locale} />}
                 {!arg.fact && arg.binding.type === "user" && (
                   <span className="text-xs" style={{ color: "var(--grounded-text-muted)" }}>
-                    用户输入
+                    {locale === "en" ? "User input" : "用户输入"}
                   </span>
                 )}
               </div>
@@ -218,7 +231,13 @@ export function BoundActionConfirmationCard({
                   onChange={(next) => setEdited((prev) => ({ ...prev, [arg.param]: next }))}
                 />
               ) : (
-                <dd className="text-sm">{arg.fact ? formatFactValue(arg.fact) : "(复杂值)"}</dd>
+                <dd className="text-sm">
+                  {arg.fact
+                    ? formatFactValue(arg.fact, "plain", locale)
+                    : locale === "en"
+                      ? "(complex value)"
+                      : "(复杂值)"}
+                </dd>
               )}
             </div>
           );
@@ -238,7 +257,7 @@ export function BoundActionConfirmationCard({
             color: "var(--grounded-status-confirmed-text)",
           }}
         >
-          重新拉取
+          {locale === "en" ? "Refresh" : "重新拉取"}
         </button>
       ) : (
         <div className="flex gap-2">
@@ -255,7 +274,7 @@ export function BoundActionConfirmationCard({
               color: "var(--grounded-status-confirmed-text)",
             }}
           >
-            确认
+            {locale === "en" ? "Approve" : "确认"}
           </button>
           <button
             type="button"
@@ -270,7 +289,7 @@ export function BoundActionConfirmationCard({
               color: "var(--grounded-text-muted)",
             }}
           >
-            拒绝
+            {locale === "en" ? "Reject" : "拒绝"}
           </button>
         </div>
       )}

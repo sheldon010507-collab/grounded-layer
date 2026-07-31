@@ -1,6 +1,7 @@
 "use client";
 
 import type { Receipt } from "@grounded/protocol";
+import type { RendererLocale } from "./format.js";
 
 export interface ReceiptCardProps {
   receipt: Receipt;
@@ -9,6 +10,7 @@ export interface ReceiptCardProps {
   onRetry?: () => void;
   /** unknown 状态才展示——只读查证,Part L.2.6:永不自动重试 unknown。 */
   onCheckStatus?: () => void;
+  locale?: RendererLocale;
 }
 
 interface StatusStyle {
@@ -50,8 +52,21 @@ const STATUS_STYLE: Record<Receipt["status"], StatusStyle> = {
   },
 };
 
+const EN_STATUS_LABEL: Record<Receipt["status"], string> = {
+  confirmed: "Confirmed",
+  failed: "Failed",
+  unknown: "Sent · no confirmation",
+  pending: "Pending",
+};
+
 /** ✓/✗/⚠ + externalRef + 重试(failed)/查状态(unknown)——Part E.9。 */
-export function ReceiptCard({ receipt, toolTitle, onRetry, onCheckStatus }: ReceiptCardProps) {
+export function ReceiptCard({
+  receipt,
+  toolTitle,
+  onRetry,
+  onCheckStatus,
+  locale = "zh",
+}: ReceiptCardProps) {
   const style = STATUS_STYLE[receipt.status];
 
   return (
@@ -81,7 +96,7 @@ export function ReceiptCard({ receipt, toolTitle, onRetry, onCheckStatus }: Rece
         </span>
         <span className="text-sm font-semibold">{toolTitle ?? receipt.intentId}</span>
         <span className="text-xs" style={{ color: style.text }}>
-          {style.label}
+          {locale === "en" ? EN_STATUS_LABEL[receipt.status] : style.label}
         </span>
       </div>
 
@@ -91,17 +106,17 @@ export function ReceiptCard({ receipt, toolTitle, onRetry, onCheckStatus }: Rece
       >
         {receipt.externalRef && (
           <>
-            <dt>凭证号</dt>
+            <dt>{locale === "en" ? "Receipt" : "凭证号"}</dt>
             <dd className="font-mono">{receipt.externalRef}</dd>
           </>
         )}
         {receipt.errorCode && (
           <>
-            <dt>错误码</dt>
+            <dt>{locale === "en" ? "Error code" : "错误码"}</dt>
             <dd className="font-mono">{receipt.errorCode}</dd>
           </>
         )}
-        <dt>时间</dt>
+        <dt>{locale === "en" ? "Recorded" : "时间"}</dt>
         <dd>{receipt.recordedAt}</dd>
       </dl>
 
@@ -118,7 +133,9 @@ export function ReceiptCard({ receipt, toolTitle, onRetry, onCheckStatus }: Rece
             color: style.text,
           }}
         >
-          重试(同一操作,不是新请求)
+          {locale === "en"
+            ? "Retry same operation · not a new request"
+            : "重试(同一操作,不是新请求)"}
         </button>
       )}
       {receipt.status === "unknown" && onCheckStatus && (
@@ -134,7 +151,7 @@ export function ReceiptCard({ receipt, toolTitle, onRetry, onCheckStatus }: Rece
             color: style.text,
           }}
         >
-          查状态(只读,不会重复执行)
+          {locale === "en" ? "Check status · read-only" : "查状态(只读,不会重复执行)"}
         </button>
       )}
     </div>
