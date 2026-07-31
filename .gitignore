@@ -1,0 +1,13 @@
+node_modules/
+dist/
+packages/*/schemas/
+.next/
+.turbo/
+*.log
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+coverage/
+.docusaurus/
+apps/docs/build/

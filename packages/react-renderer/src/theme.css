@@ -1,0 +1,50 @@
+/* Part E.9:"Tailwind + CSS 变量主题"——只有这些变量,不含任何 Tailwind 指令。
+   Tailwind 消费方(如 apps/playground)直接 import 这份文件拿主题色 token;
+   Tailwind 工具类本身走各自 app 的 JIT 扫描 packages/react-renderer/src(见该包 README)。
+   消费方在任意祖先元素上覆盖这些变量即可换肤,不需要改组件代码。 */
+:root {
+  --grounded-surface: #171717;
+  --grounded-surface-2: #0a0a0a;
+  --grounded-border: #404040;
+  --grounded-text: #f5f5f5;
+  --grounded-text-muted: #a3a3a3;
+
+  /* kind:"observed" —— 已核实 */
+  --grounded-observed-bg: #082f49;
+  --grounded-observed-border: #0369a1;
+  --grounded-observed-text: #7dd3fc;
+
+  /* kind:"derived" —— 模型推导·未验证(Part L.4.12:必须与 observed 视觉上明显不同) */
+  --grounded-derived-bg: #451a03;
+  --grounded-derived-border: #b45309;
+  --grounded-derived-text: #fcd34d;
+
+  /* kind:"receipt" —— 执行凭证 */
+  --grounded-receipt-bg: #052e16;
+  --grounded-receipt-border: #15803d;
+  --grounded-receipt-text: #86efac;
+
+  /* ReceiptCard 的状态色——独立于上面 Fact.kind 的三色,这是 Receipt.status 的语义
+     (confirmed 和 kind:"receipt" 徽章故意同色系,两者都代表"有凭证",一眼能对上)。 */
+  --grounded-status-confirmed-bg: #052e16;
+  --grounded-status-confirmed-border: #15803d;
+  --grounded-status-confirmed-text: #86efac;
+
+  --grounded-status-failed-bg: #450a0a;
+  --grounded-status-failed-border: #b91c1c;
+  --grounded-status-failed-text: #fca5a5;
+
+  --grounded-status-unknown-bg: #451a03;
+  --grounded-status-unknown-border: #b45309;
+  --grounded-status-unknown-text: #fcd34d;
+
+  --grounded-status-pending-bg: #1e1b4b;
+  --grounded-status-pending-border: #4338ca;
+  --grounded-status-pending-text: #a5b4fc;
+
+  /* AuditRibbon 的 noCheckableClaims 灰态(Part L.4.14)——刻意不用上面任何一个状态色,
+     不能让"没有可核内容"看起来像"全绿通过"或"有问题需要留意"。 */
+  --grounded-status-gray-bg: #262626;
+  --grounded-status-gray-border: #525252;
+  --grounded-status-gray-text: #a3a3a3;
+}

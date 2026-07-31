@@ -1,0 +1,8 @@
+/* 不用 Tailwind 的消费方(以及本包的 Storybook)直接引入这一份"全量"样式即可;
+   已经用 Tailwind 的消费方(如 apps/playground)应改为只引入 theme.css,
+   工具类走自己的 JIT 扫描——否则会得到两份重复的 Tailwind base/reset。 */
+@import "./theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

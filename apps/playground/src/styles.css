@@ -1,0 +1,113 @@
+:root {
+  color: #eef2ff;
+  background: #0e1220;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  --grounded-surface: #171d2c;
+  --grounded-surface-2: #20283b;
+  --grounded-border: #3a4660;
+  --grounded-text: #eef2ff;
+  --grounded-text-muted: #aab6d1;
+  --grounded-derived-bg: #2d254e;
+  --grounded-derived-border: #8c73d8;
+  --grounded-derived-text: #d8caff;
+  --grounded-status-confirmed-bg: #173d37;
+  --grounded-status-confirmed-border: #3bb59d;
+  --grounded-status-confirmed-text: #8ce5d0;
+  --grounded-status-failed-bg: #4b252c;
+  --grounded-status-failed-border: #e87989;
+  --grounded-status-failed-text: #ffb3bd;
+  --grounded-status-unknown-bg: #4c3a1d;
+  --grounded-status-unknown-border: #e1b45a;
+  --grounded-status-unknown-text: #f3d58f;
+  --grounded-status-pending-bg: #263450;
+  --grounded-status-pending-border: #91a9df;
+  --grounded-status-pending-text: #c1d2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+}
+button,
+select {
+  font: inherit;
+}
+button,
+select {
+  color: var(--grounded-text);
+  background: var(--grounded-surface-2);
+  border: 1px solid var(--grounded-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.page-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+.hero {
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+}
+.eyebrow {
+  color: #9b8cff;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .72rem;
+  font-weight: 700;
+  margin: 0 0 .6rem;
+}
+h1 {
+  font-size: clamp(2.4rem, 7vw, 5.4rem);
+  letter-spacing: -.06em;
+  line-height: 0.96;
+  margin: 0 0 1.25rem;
+}
+h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.lede {
+  color: var(--grounded-text-muted);
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+.two-up {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+.panel {
+  background: rgba(23, 29, 44, 0.78);
+  border: 1px solid #27314a;
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+  margin-bottom: 1rem;
+}
+.panel-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.event-log {
+  min-height: 3rem;
+  white-space: pre-wrap;
+  color: #9b8cff;
+  font-size: .75rem;
+  margin: 1rem 0 0;
+}
+footer {
+  color: var(--grounded-text-muted);
+  font-size: .8rem;
+  padding-top: 1rem;
+}

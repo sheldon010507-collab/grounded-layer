@@ -1,0 +1,35 @@
+{
+  "name": "@grounded/protocol",
+  "version": "1.0.0-rc.0",
+  "description": "Grounded Layer 核心协议:Fact/Intent/BatchIntent/Receipt/ToolManifest/HarnessEvent 的 Zod 定义与 JSON Schema 产物",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist", "schemas"],
+  "scripts": {
+    "build": "tsup && tsx scripts/generate-json-schema.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "dev": "tsup --watch"
+  },
+  "peerDependencies": {
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "zod": "^3.24.0",
+    "zod-to-json-schema": "^3.24.1"
+  }
+}
