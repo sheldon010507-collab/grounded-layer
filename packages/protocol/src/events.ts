@@ -23,7 +23,7 @@ export const HarnessEvent = z.discriminatedUnion("t", [
     runId,
     stepId,
     toolRef: z.string().optional(),
-    plannerRationale: z.string().optional(), // 标记为不可验证的自述,auditor 不对其断言
+    plannerRationale: z.string().optional(), // descriptive model output; not a verified fact
   }),
   z.object({ t: z.literal("fact.observed"), runId, fact: Fact }),
   z.object({ t: z.literal("intent.proposed"), runId, intent: Intent }),

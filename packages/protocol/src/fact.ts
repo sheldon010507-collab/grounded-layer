@@ -15,7 +15,7 @@ export type FactKind = z.infer<typeof FactKind>;
 // observed = 从外部系统查到的
 // derived  = 由其他 Fact 推导得出(必须填 derivedFrom);值由模型给出、仅声明依据、未经验证 ——
 //            UI 必须用独立徽章呈现"模型推导 · 未验证"(不与 observed 同色,见 react-renderer)
-// receipt  = 执行凭证(只能由 tool-wrapper 内部通道生成,见 fact-core.recordReceiptFact)
+// receipt = an execution receipt produced by the runtime's trusted adapter.
 
 export const RiskClass = z.enum(["low", "normal", "high"]);
 export type RiskClass = z.infer<typeof RiskClass>;
@@ -29,7 +29,7 @@ export const Fact = z
     entityRef: z.string().optional(),
     // 【v2.2/v2.3】多实体作用域,例如 "room:1204"。
     // 解析唯一性单位 = (key, entityRef);同 key 多 entityRef 且绑定未指明 → 解析歧义,
-    // fact-core.resolve() 必须抛 AmbiguousKeyError 结构化回喂重规划,不得静默取任意一个。
+    // A runtime must reject ambiguous keys instead of silently choosing one.
     value: z.union([z.string(), z.number(), z.boolean(), z.null(), z.array(z.unknown())]),
     // 【v2.3】数组分支 = 集合 Fact(Part L.1.5):整体单来源单 etag;
     // 仅入选某个 Intent 的条目在绑定时拆成独立 Fact(带 derivedFrom 指回集合)。
@@ -41,7 +41,7 @@ export const Fact = z
     source: FactSource,
     observedAt: z.string().datetime(),
     expiresAt: z.string().datetime().optional(), // 过期后 UI 自动降级为 stale
-    etag: z.string().optional(), // 供 action-guard 重验比对
+    etag: z.string().optional(), // used by a runtime to compare a revalidation result
     supersededBy: z.string().optional(), // 新值出现时旧 Fact 只标记,不删除(append-only)
   })
   .refine((f) => f.kind !== "derived" || (f.derivedFrom?.length ?? 0) > 0, {

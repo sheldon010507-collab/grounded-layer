@@ -31,7 +31,7 @@ export interface ActionConfirmationCardProps {
  * @deprecated 作为**执行集成入口**已被 `BoundActionConfirmationCard` 取代——那个组件
  * 消费服务端签发的 `ConfirmationEnvelope`(带 HMAC token,校验在服务端,客户端永不自己
  * 拼绑定回传),这个组件的 `onApprove(editedValues)` 把裸编辑值交还给调用方自己拼
- * `ResolvedBinding[]`,正是"客户端能自己拼绑定"这类漏洞的根源之一(见 action-guard 的
+ * `ResolvedBinding[]`, which is why callers should prefer the signed envelope component.
  * 安全修复记录)。仍可作为**纯展示**组件使用(不接执行动作,只是把 Intent 参数摆出来看),
  * 不要再接到任何会真的调 decide()/execute() 的路径上。
  */

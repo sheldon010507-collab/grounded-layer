@@ -4,7 +4,7 @@ import { type FactFormat, formatFactValue } from "./format.js";
 
 // 字段形状故意对齐 Part E.5 的 UI IR(`{ label, factId, format }`)——
 // 差别只是这里已经是"resolve 完的 Fact",不是"factId 字符串"。
-// Week 6 的 ui-binding 编译器解析完 FactId 之后,产出的就是这个 props 形状,
+// A runtime compiler can resolve Fact identifiers into this props shape,
 // 届时 FactCard 不需要改一行代码。
 export interface FactField {
   label: string;

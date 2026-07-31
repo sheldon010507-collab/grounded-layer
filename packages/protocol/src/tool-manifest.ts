@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // ── Tool Manifest ───────────────────────────────────
-// 风险属性在接入时声明,不在运行时由模型判断——这是防"看模型心情"的关键(Part 3 tool-wrapper)。
+// Risk attributes are declared when a tool is integrated, not inferred from model output.
 export const ToolManifest = z.object({
   ref: z.string(), // "gmail.send"
   title: z.string(),

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // ── Receipt ─────────────────────────────────────────
-// "成功"的唯一合法来源。kind:"receipt" 的 Fact 只能由 tool-wrapper 从这个类型的响应构造(见 fact-core)。
+// A receipt is the only protocol-level representation of an external outcome.
 export const ReceiptStatus = z.enum(["confirmed", "failed", "unknown", "pending"]);
 export type ReceiptStatus = z.infer<typeof ReceiptStatus>;
 // unknown = 请求已发出但未收到确认(超时/断连)。必须如实呈现,禁止猜测,且永不自动重试。
@@ -24,7 +24,7 @@ export type Receipt = z.infer<typeof Receipt>;
  * 协议包只定义"签什么"——canonical payload 的字段顺序与拼接方式,
  * 保证签名方与验签方(例如 react-renderer,
  * 通常在浏览器用 Web Crypto SubtleCrypto)对同一个 Receipt 算出完全相同的待签字符串。
- * 实际 HMAC-SHA256 签名/验签(需要密钥材料)属于 tool-wrapper 的职责,不在本包实现。
+ * Actual HMAC signing and verification require key material and belong to a runtime adapter.
  *
  * 【v2.3】errorCode 现已入载荷:failed 回执的错误码同样不可被篡改。
  */

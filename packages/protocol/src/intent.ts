@@ -34,7 +34,7 @@ export const Intent = z.object({
   // 这是"decide 与后台 stale 标记竞态"被挡住的位置,而不是靠约定。
   requiresRatification: z.array(z.string()).optional(),
   // 【Week 4 补,C.4 升格路径的落点】哪些 param 当前绑的是 derived 候选、
-  // 需要用户在 approve 时核定为 user 分支(带 decidedBy)。propose() 时由 action-guard
+  // The user branch is selected at approval time and records who decided it.
   // 写入;decide() approve 时必须把列出的每个 param 都转成 user 分支,否则 execute()
   // 拒绝执行(PolicyViolation)——这是"paramPolicy 终检"真正有牙齿的地方。
 });
