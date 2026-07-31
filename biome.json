@@ -8,7 +8,8 @@
       "node_modules/**",
       "*.md",
       ".docusaurus/**",
-      "apps/docs/build/**"
+      "apps/docs/build/**",
+      "packages/protocol/schemas/**"
     ]
   },
   "formatter": {
